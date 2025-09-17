@@ -32,7 +32,7 @@ const resources = {
       // Status
       active: 'Active',
       inactive: 'Inactive',
-      emergency: 'Emergency',
+      emergencyLabel: 'Emergency',
       
       // Alerts
       recentAlerts: 'Recent Alerts',
@@ -44,7 +44,7 @@ const resources = {
       unresolved: 'Unresolved',
       
       // Risk Zones
-      riskZones: 'Risk Zones',
+      riskZonesTitle: 'Risk Zones',
       addRiskZone: 'Add Risk Zone',
       editRiskZone: 'Edit Risk Zone',
       deleteRiskZone: 'Delete Risk Zone',
@@ -120,7 +120,7 @@ const resources = {
       // Status
       active: 'सक्रिय',
       inactive: 'निष्क्रिय',
-      emergency: 'आपातकाल',
+      emergencyLabel: 'आपातकाल',
       
       // Alerts
       recentAlerts: 'हाल के अलर्ट',
@@ -132,7 +132,7 @@ const resources = {
       unresolved: 'अनसुलझा',
       
       // Risk Zones
-      riskZones: 'जोखिम क्षेत्र',
+      riskZonesTitle: 'जोखिम क्षेत्र',
       addRiskZone: 'जोखिम क्षेत्र जोड़ें',
       editRiskZone: 'जोखिम क्षेत्र संपादित करें',
       deleteRiskZone: 'जोखिम क्षेत्र हटाएं',
@@ -208,7 +208,7 @@ const resources = {
       // Status
       active: 'সক্রিয়',
       inactive: 'নিষ্ক্রিয়',
-      emergency: 'জরুরি',
+      emergencyLabel: 'জরুরি',
       
       // Alerts
       recentAlerts: 'সাম্প্রতিক অ্যালার্ট',
@@ -220,7 +220,7 @@ const resources = {
       unresolved: 'অমীমাংসিত',
       
       // Risk Zones
-      riskZones: 'ঝুঁকি অঞ্চল',
+      riskZonesTitle: 'ঝুঁকি অঞ্চল',
       addRiskZone: 'ঝুঁকি অঞ্চল যোগ করুন',
       editRiskZone: 'ঝুঁকি অঞ্চল সম্পাদনা করুন',
       deleteRiskZone: 'ঝুঁকি অঞ্চল মুছুন',
@@ -296,7 +296,7 @@ const resources = {
       // Status
       active: 'செயலில்',
       inactive: 'செயலற்ற',
-      emergency: 'அவசர',
+      emergencyLabel: 'அவசர',
       
       // Alerts
       recentAlerts: 'சமீபத்திய எச்சரிக்கைகள்',
@@ -308,7 +308,7 @@ const resources = {
       unresolved: 'தீர்க்கப்படாத',
       
       // Risk Zones
-      riskZones: 'ஆபத்து மண்டலங்கள்',
+      riskZonesTitle: 'ஆபத்து மண்டலங்கள்',
       addRiskZone: 'ஆபத்து மண்டலத்தைச் சேர்க்கவும்',
       editRiskZone: 'ஆபத்து மண்டலத்தைத் திருத்தவும்',
       deleteRiskZone: 'ஆபத்து மண்டலத்தை நீக்கவும்',
@@ -354,7 +354,16 @@ const resources = {
       locationHistory: 'இட வரலாறு',
     }
   },
-  es: {
+  mr: { translation: { dashboard: 'पर्यटक सुरक्षा डॅशबोर्ड', subtitle: 'रिअल-टाइम मॉनिटरिंग आणि व्यवस्थापन', totalTourists: 'एकूण पर्यटक', activeTourists: 'सक्रिय पर्यटक', unresolvedAlerts: 'न सुटलेल्या सूचना', riskZones: 'धोका क्षेत्रे', generatePDF: 'PDF तयार करा' } },
+  te: { translation: { dashboard: 'పర్యాటక భద్రత డాష్‌బోర్డ్', subtitle: 'రియల్-టైమ్ మానిటరింగ్ మరియు నిర్వహణ', totalTourists: 'మొత్తం పర్యాటకులు', activeTourists: 'సక్రియ పర్యాటకులు', unresolvedAlerts: 'పరిష్కరించని హెచ్చరికలు', riskZones: 'ప్రమాద ప్రాంతాలు', generatePDF: 'PDF సృష్టించండి' } },
+  kn: { translation: { dashboard: 'ಪರ್ಯಟಕ ಸುರಕ್ಷತಾ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್', subtitle: 'ರಿಯಲ್-ಟೈಮ್ ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ನಿರ್ವಹಣೆ', totalTourists: 'ಒಟ್ಟು ಪ್ರವಾಸಿಗರು', activeTourists: 'ಸಕ್ರಿಯ ಪ್ರವಾಸಿಗರು', unresolvedAlerts: 'ಬಾಕಿ ಎಚ್ಚರಿಕೆಗಳು', riskZones: 'ಅಪಾಯ ಪ್ರದೇಶಗಳು', generatePDF: 'PDF ರಚಿಸಿ' } },
+  gu: { translation: { dashboard: 'પર્યટક સલામતી ડેશબોર્ડ', subtitle: 'રીઅલ-ટાઈમ મોનીટરીંગ અને મેનેજમેન્ટ', totalTourists: 'કુલ પર્યટકો', activeTourists: 'સક્રિય પર્યટકો', unresolvedAlerts: 'અનિર્ણિત એલર્ટ', riskZones: 'જોખમ ઝોન', generatePDF: 'PDF બનાવો' } },
+  pa: { translation: { dashboard: 'ਯਾਤਰੀ ਸੁਰੱਖਿਆ ਡੈਸ਼ਬੋਰਡ', subtitle: 'ਰੀਅਲ-ਟਾਈਮ ਨਿਗਰਾਨੀ ਅਤੇ ਪ੍ਰਬੰਧਨ', totalTourists: 'ਕੁੱਲ ਯਾਤਰੀ', activeTourists: 'ਸਰਗਰਮ ਯਾਤਰੀ', unresolvedAlerts: 'ਅਨਸੁਲਝੇ ਚੇਤਾਵਨੀ', riskZones: 'ਖਤਰਾ ਖੇਤਰ', generatePDF: 'PDF ਬਣਾਓ' } },
+  ur: { translation: { dashboard: 'سیاحتی حفاظت ڈیش بورڈ', subtitle: 'ریئل ٹائم مانیٹرنگ اور مینجمنٹ', totalTourists: 'کل سیاح', activeTourists: 'فعال سیاح', unresolvedAlerts: 'غیر حل شدہ الرٹس', riskZones: 'خطرے کے علاقے', generatePDF: 'PDF بنائیں' } },
+  or: { translation: { dashboard: 'ପର୍ଯ୍ୟଟକ ସୁରକ୍ଷା ଡ୍ୟାଶବୋର୍ଡ', subtitle: 'ରିଅଲ୍-ଟାଇମ ମନିଟରିଂ ଏବଂ ପରିଚାଳନା', totalTourists: 'ମୋଟ ପର୍ଯ୍ୟଟକ', activeTourists: 'ସକ୍ରିୟ ପର୍ଯ୍ୟଟକ', unresolvedAlerts: 'ଅନମୋଚିତ ସତର୍କତା', riskZones: 'ଝୁମ୍ପ ଅଞ୍ଚଳ', generatePDF: 'PDF ସୃଷ୍ଟି କରନ୍ତୁ' } },
+  ml: { translation: { dashboard: 'സഞ്ചാരികളുടെ സുരക്ഷ ഡാഷ്ബോർഡ്', subtitle: 'റിയൽ-ടൈം നിരീക്ഷണവും മാനേജ്മെന്റും', totalTourists: 'ആകെ യാത്രക്കാരൻ', activeTourists: 'സജീവ യാത്രക്കാരൻ', unresolvedAlerts: 'പരിഹരിക്കാത്ത അലർട്ടുകൾ', riskZones: 'അപകട മേഖലകൾ', generatePDF: 'PDF സൃഷ്ടിക്കുക' } },
+  as: { translation: { dashboard: 'পর্যটক সুৰক্ষা ডেশ্বব' , subtitle: 'ৰিয়েল-টাইম মনিটৰিং আৰু ব্যৱস্থাপনা', totalTourists: 'মুঠ পৰ্যটক', activeTourists: 'সক্ৰিয় পৰ্যটক', unresolvedAlerts: 'অমীমাংসিত সতৰ্কবাৰ্তা', riskZones: 'বিপদ অঞ্চল', generatePDF: 'PDF সৃষ্টি কৰক' } },
+  esES: {
     translation: {
       // Navigation
       dashboard: 'Panel de Seguridad Turística',
@@ -384,7 +393,7 @@ const resources = {
       // Status
       active: 'Activo',
       inactive: 'Inactivo',
-      emergency: 'Emergencia',
+      emergencyLabel: 'Emergencia',
       
       // Alerts
       recentAlerts: 'Alertas Recientes',
@@ -396,7 +405,7 @@ const resources = {
       unresolved: 'Sin Resolver',
       
       // Risk Zones
-      riskZones: 'Zonas de Riesgo',
+      riskZonesTitle: 'Zonas de Riesgo',
       addRiskZone: 'Agregar Zona de Riesgo',
       editRiskZone: 'Editar Zona de Riesgo',
       deleteRiskZone: 'Eliminar Zona de Riesgo',
@@ -442,7 +451,7 @@ const resources = {
       locationHistory: 'Historial de Ubicaciones',
     }
   },
-  fr: {
+  frFR: {
     translation: {
       // Navigation
       dashboard: 'Tableau de Bord de Sécurité Touristique',
@@ -472,7 +481,7 @@ const resources = {
       // Status
       active: 'Actif',
       inactive: 'Inactif',
-      emergency: 'Urgence',
+      emergencyLabel: 'Urgence',
       
       // Alerts
       recentAlerts: 'Alertes Récentes',
@@ -484,7 +493,7 @@ const resources = {
       unresolved: 'Non Résolu',
       
       // Risk Zones
-      riskZones: 'Zones à Risque',
+      riskZonesTitle: 'Zones à Risque',
       addRiskZone: 'Ajouter une Zone à Risque',
       editRiskZone: 'Modifier la Zone à Risque',
       deleteRiskZone: 'Supprimer la Zone à Risque',

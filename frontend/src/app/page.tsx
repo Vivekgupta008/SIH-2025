@@ -2,13 +2,21 @@
 
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { MapPin, Download } from 'lucide-react';
+// Icons are optional; fallback if not installed
+const MapPin = (props: any) => (
+  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.42 8.6a8 8 0 1 0-12.85 9.4L12 22l4.43-3.99a8 8 0 0 0 3.99-9.41Z"/><circle cx="12" cy="10" r="3"/></svg>
+);
+const Download = (props: any) => (
+  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+);
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import StatsCards from '@/components/Dashboard/StatsCards';
 import TouristSearch from '@/components/Search/TouristSearch';
 import AlertsFeed from '@/components/Dashboard/AlertsFeed';
 import RiskZoneManager from '@/components/RiskZones/RiskZoneManager';
+import EmergencyAccess from '@/components/Emergency/EmergencyAccess';
+import EFIRForm from '@/components/Emergency/EFIRForm';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import ThemeToggle from '@/components/ThemeToggle';
 import { apiClient, Tourist, Alert, RiskZone, Stats, CreateTouristData, UpdateTouristData, CreateRiskZoneData } from '@/utils/api';
@@ -33,6 +41,7 @@ export default function Dashboard() {
   const [stats, setStats] = useState<Stats>({
     total_tourists: 0,
     active_tourists: 0,
+    total_alerts: 0,
     unresolved_alerts: 0,
     risk_zones: 0,
   });
@@ -215,7 +224,7 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {activeTab === 'tourists' ? (
             <>
-              <div className="lg:col-span-2">
+              <div className="lg:col-span-2 space-y-6">
                 <TouristSearch
                   tourists={tourists}
                   onTouristSelect={setSelectedTourist}
@@ -226,9 +235,15 @@ export default function Dashboard() {
                   onTouristDelete={handleDeleteTourist}
                   alerts={alerts}
                 />
+                {/* Move E-FIR to the left column to utilize space */}
+                <EFIRForm tourists={tourists} />
               </div>
-              <div className="lg:col-span-1">
+              <div className="lg:col-span-1 space-y-6">
                 <AlertsFeed alerts={alerts} loading={loading} />
+                <EmergencyAccess
+                  tourists={tourists}
+                  onAlertCreated={(a) => setAlerts((prev) => [a, ...prev])}
+                />
               </div>
             </>
           ) : (
