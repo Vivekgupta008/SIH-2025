@@ -10,3 +10,6 @@ frontend/.next/
 .env
 .env.local
 frontend/.env.local
+
+# Ignore SQLite DB file
+*.db
