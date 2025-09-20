@@ -546,6 +546,24 @@
 // utils/api.ts
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
+export interface DigitalIDData {
+  id: number;
+  kyc_id: string;
+  status: string;
+  valid_from: string;
+  valid_to: string;
+  public_address?: string;
+  block_hash?: string;
+  verification_hash?: string;
+  blockchain_id?: number;
+  tx_hash?: string;
+  contract_address?: string;
+  chain_id?: number;
+  decentralized_status: string;
+  block_index?: number;
+  timestamp?: string;
+}
+
 export interface Tourist {
   id: number;
   name: string;
@@ -557,6 +575,7 @@ export interface Tourist {
   last_location_update: string;
   emergency_contact?: string;
   created_at: string;
+  digital_id?: DigitalIDData;
 }
 
 export interface Alert {
