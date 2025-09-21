@@ -25,6 +25,8 @@ interface Tourist {
   last_location_update: string;
   emergency_contact?: string;
   created_at: string;
+  digital_id?: string;
+  block_hash?: string;
 }
 
 interface RiskZone {
@@ -304,8 +306,9 @@ const TouristMap: React.FC<TouristMapProps> = ({ tourists, selectedTourist, onTo
           >
             <Popup>
               <div className="p-2">
-                <h3 className="font-semibold text-lg">{tourist.name}</h3>
                 <p className="text-sm text-gray-600">{tourist.email}</p>
+                <h3 className="font-semibold text-lg">{tourist.name}</h3>
+                <p className="text-sm text-gray-600">"hello"</p>
                 <p className="text-sm">
                   Status: <span className={`font-medium ${
                     tourist.status === 'active' ? 'text-green-600' :

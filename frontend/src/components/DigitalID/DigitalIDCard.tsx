@@ -233,6 +233,27 @@ export default function DigitalIDCard({ digitalId, className }: DigitalIDCardPro
         </div>
       )}
 
+      {digitalId.block_hash && (
+        <div>
+          <label className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1 block">
+            <Hash className="w-4 h-4 inline mr-1" />
+            Block Hash
+          </label>
+          <div className="flex items-center space-x-2">
+            <code className="bg-gray-100 dark:bg-gray-700 px-3 py-2 rounded text-xs font-mono flex-1 truncate">
+              {digitalId.block_hash}
+            </code>
+            <button
+              onClick={() => copyToClipboard(digitalId.block_hash!)}
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+              title="Copy Block Hash"
+            >
+              <Copy className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Footer */}
       <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-500 dark:text-gray-400">

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from models.tourist import Tourist, TouristCreate, TouristResponse, TouristUpdate
-from models.digital_id import DigitalIDIssueRequest, DigitalIDResponse
+from models.digital_id import DigitalIDIssueRequest, DigitalIDResponse,DigitalIDOnChain
 from database.connection import get_db
 from datetime import datetime, timedelta
 import uuid
@@ -21,6 +21,11 @@ def get_tourists(skip: int = 0, limit: int = 100, db: Session = Depends(get_db))
     # Create a map of tourist_id to digital_id data
     digital_id_map = {}
     for digital_id in digital_ids:
+        block = digital_id.block
+        onchain = db.query(DigitalIDOnChain).filter(
+            DigitalIDOnChain.digital_id_id == digital_id.id
+        ).first()
+
         digital_id_map[digital_id.tourist_id] = {
             "id": digital_id.id,
             "tourist_id": digital_id.tourist_id,
@@ -31,16 +36,16 @@ def get_tourists(skip: int = 0, limit: int = 100, db: Session = Depends(get_db))
             "valid_to": digital_id.valid_to.isoformat(),
             "status": digital_id.status,
             "public_address": digital_id.public_address,
-            "block_hash": getattr(digital_id, 'block_hash', None),
-            "signature": getattr(digital_id, 'signature', None),
+            "block_hash": block.hash if block else None,
+            "signature": block.signature if block else None,
             "verification_hash": None,
             "blockchain_id": None,
-            "tx_hash": None,
-            "contract_address": None,
-            "chain_id": None,
-            "decentralized_status": "local_only",
-            "block_index": None,
-            "timestamp": None
+            "tx_hash": onchain.tx_hash if onchain else None,
+            "contract_address": onchain.contract_address if onchain else None,
+            "chain_id": onchain.chain_id if onchain else None,
+            "decentralized_status": onchain.status if onchain else "local_only",
+            "block_index": block.index if block else None,
+            "timestamp": block.timestamp.isoformat() if block else None,
         }
     
     # Add digital_id data to each tourist
@@ -75,6 +80,11 @@ def get_tourist(tourist_id: int, db: Session = Depends(get_db)):
     
     digital_id_data = None
     if digital_id:
+        block = digital_id.block
+        onchain = db.query(DigitalIDOnChain).filter(
+            DigitalIDOnChain.digital_id_id == digital_id.id
+        ).first()
+
         digital_id_data = {
             "id": digital_id.id,
             "tourist_id": digital_id.tourist_id,
@@ -85,16 +95,16 @@ def get_tourist(tourist_id: int, db: Session = Depends(get_db)):
             "valid_to": digital_id.valid_to.isoformat(),
             "status": digital_id.status,
             "public_address": digital_id.public_address,
-            "block_hash": getattr(digital_id, 'block_hash', None),
-            "signature": getattr(digital_id, 'signature', None),
+            "block_hash": block.hash if block else None,
+            "signature": block.signature if block else None,
             "verification_hash": None,
             "blockchain_id": None,
-            "tx_hash": None,
-            "contract_address": None,
-            "chain_id": None,
-            "decentralized_status": "local_only",
-            "block_index": None,
-            "timestamp": None
+            "tx_hash": onchain.tx_hash if onchain else None,
+            "contract_address": onchain.contract_address if onchain else None,
+            "chain_id": onchain.chain_id if onchain else None,
+            "decentralized_status": onchain.status if onchain else "local_only",
+            "block_index": block.index if block else None,
+            "timestamp": block.timestamp.isoformat() if block else None,
         }
     
     # Create response with digital_id data
@@ -236,7 +246,19 @@ def create_tourist(tourist: TouristCreate, db: Session = Depends(get_db)):
             }
             
         except Exception as blockchain_error:
-            # If blockchain fails, still return digital ID with local verification
+            # If blockchain fails, still store a placeholder DigitalIDOnChain
+            onchain = DigitalIDOnChain(
+                digital_id_id=db_did.id,
+                chain_id=None,
+                contract_address=None,
+                tx_hash=None,
+                issue_block_number=None,
+                status="anchor_failed",
+            )
+            db.add(onchain)
+            db.commit()
+
+            # Compute local verification hash
             verification_data = f"{db_did.id}|{db_did.kyc_id}|{block.hash}"
             verification_hash = hashlib.sha256(verification_data.encode()).hexdigest()
             
@@ -257,10 +279,11 @@ def create_tourist(tourist: TouristCreate, db: Session = Depends(get_db)):
                 "tx_hash": None,
                 "contract_address": None,
                 "chain_id": None,
-                "decentralized_status": f"local_only: {str(blockchain_error)}",
+                "decentralized_status": "anchor_failed",
                 "block_index": block.index,
                 "timestamp": block.timestamp.isoformat()
             }
+
         
     except Exception as e:
         # If digital ID creation fails, we should still return the tourist
